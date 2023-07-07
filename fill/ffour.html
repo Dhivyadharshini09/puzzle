@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .drag-item {
+      width: 40px;
+      height: 40px;
+      background-color: #f1f1f1;
+      border: 1px solid #ccc;
+      text-align: center;
+      line-height: 40px;
+      cursor: move;
+      display: inline-block;
+    }
+    
+    .drop-area {
+      width: 40px;
+      height: 40px;
+      background-color: #f9f9f9;
+      border: 2px dashed #999;
+      text-align: center;
+      line-height: 40px;
+      display: inline-block;
+    }
+
+    .word-container {
+      margin-bottom: 20px;
+    }
+    p {display: inline-block;
+    font-size: 25px;}
+    body {
+    background-color: powderblue;}
+    h1 {color: blue}
+  </style>
+</head>
+<body><center>
+  <h1> FILL THE BLANK SPACE</h1>
+  <div class="word-container">
+    <div id="drag-item-1" class="drag-item" draggable="true">A</div>
+    <div id="drag-item-2" class="drag-item" draggable="true">B</div>
+    <div id="drag-item-3" class="drag-item" draggable="true">C</div>
+    <div id="drag-item-4" class="drag-item" draggable="true">D</div>
+    <div id="drag-item-5" class="drag-item" draggable="true">E</div>
+    <div id="drag-item-6" class="drag-item" draggable="true">F</div>
+    <div id="drag-item-7" class="drag-item" draggable="true">G</div>
+    <div id="drag-item-8" class="drag-item" draggable="true">H</div>
+    <div id="drag-item-9" class="drag-item" draggable="true">I</div>
+    <div id="drag-item-10" class="drag-item" draggable="true">J</div>
+    <div id="drag-item-11" class="drag-item" draggable="true">K</div>
+    <div id="drag-item-12" class="drag-item" draggable="true">L</div>
+    <div id="drag-item-13" class="drag-item" draggable="true">M</div>
+    <div id="drag-item-14" class="drag-item" draggable="true">N</div>
+    <div id="drag-item-15" class="drag-item" draggable="true">O</div>
+    <div id="drag-item-16" class="drag-item" draggable="true">P</div>
+    <div id="drag-item-17" class="drag-item" draggable="true">Q</div>
+    <div id="drag-item-18" class="drag-item" draggable="true">R</div>
+    <div id="drag-item-19" class="drag-item" draggable="true">S</div>
+    <div id="drag-item-20" class="drag-item" draggable="true">T</div>
+    <div id="drag-item-21" class="drag-item" draggable="true">U</div>
+    <div id="drag-item-22" class="drag-item" draggable="true">V</div>
+    <div id="drag-item-23" class="drag-item" draggable="true">W</div>
+    <div id="drag-item-24" class="drag-item" draggable="true">X</div>
+    <div id="drag-item-25" class="drag-item" draggable="true">Y</div>
+    <div id="drag-item-26" class="drag-item" draggable="true">Z</div>
+  </div>
+  
+  <div class="word-container">
+    <p> R E  </p>
+    <div id="drop-area-1" class="drop-area"></div>
+    <div id="drop-area-2" class="drop-area"></div>
+    <p> T </p>
+    
+    <div id="drop-area-3" class="drop-area"></div>
+  </div>
+    </center>
+  <script>
+    var dragItems = document.querySelectorAll(".drag-item");
+    var dropAreas = document.querySelectorAll(".drop-area");
+    dragItems.forEach(function (dragItem) {
+      dragItem.addEventListener("dragstart", function (event) {
+        event.dataTransfer.setData("text/plain", event.target.id);
+      });
+    });
+    dropAreas.forEach(function (dropArea) {
+      dropArea.addEventListener("dragover", function (event) {
+        event.preventDefault(); 
+      });
+
+      dropArea.addEventListener("drop", function (event) {
+        event.preventDefault(); 
+        var draggedItemId = event.dataTransfer.getData("text/plain");
+        var draggedItem = document.getElementById(draggedItemId);
+        event.target.appendChild(draggedItem);
+      });
+    });
+
+    function verifyAnswer() {
+      var answer = "";
+      dropAreas.forEach(function (dropArea) {
+        var dragItem = dropArea.querySelector(".drag-item");
+        if (dragItem) {
+          answer += dragItem.innerText;
+        }
+      });
+
+      if (answer === "MOE") {
+        alert("Correct answer!");
+      } else {
+        alert("Incorrect answer!");
+      }
+    }
+  </script>
+
+ <center> <button onclick="verifyAnswer()">SUBMIT</button><br><br>
+ 
+ <a href ="ffive.html"><img id="next" src="next.jpeg" width="50" height="50"></a><br><br>
+ <a href ="home.html"><img id="home" src="home.png" width="50" height="50"></a></center>
+</body>
+</html>
+
