@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     <title>WELCOME</title>
+        <style>
+        
+        
+  
+    .word {
+      display: inline-block;
+      padding: 5px;
+      border: 1px solid black;
+      font-size: 45px;
+      color: red;
+    }
+    body {background-color: powderblue;}
+    h1   {color: blue;}
+    
+  </style>
+  <script>
+    let originalWord = "LETTER";
+    let c = "ETETLR";
+    let currentWord = c.split('');
+
+    function allowDrop(ev) {
+      ev.preventDefault();
+    }
+
+    function drag(ev) {
+    
+      ev.dataTransfer.setData("text", ev.target.id);
+      
+    }
+      function drop(ev) {
+      
+      ev.preventDefault();
+      const sourceId = ev.dataTransfer.getData("text");
+      const sourceChar = document.getElementById(sourceId).textContent;
+      const targetChar = ev.target.textContent;
+      
+      
+      const sourceIndex = currentWord.indexOf(sourceChar);
+      const targetIndex = currentWord.indexOf(targetChar);
+
+      currentWord[sourceIndex] = targetChar;
+      currentWord[targetIndex] = sourceChar;
+
+      displayWord();
+    }
+   function displayWord() {
+   
+      const wordContainer = document.getElementById("wordContainer");
+      wordContainer.innerHTML = "";
+
+      currentWord.forEach((char, index) => {
+      
+        const charElement = document.createElement("span");
+        charElement.textContent = char;
+        charElement.id = `char_${index}`;
+        charElement.draggable = true;
+        charElement.addEventListener("dragstart", drag);
+        wordContainer.appendChild(charElement);
+        
+      });
+
+      if (currentWord.join("") === originalWord) {
+        document.getElementById("result").textContent = "CORRECT";
+      } else {
+        document.getElementById("result").textContent = "WRONG";
+      }
+    }
+ window.onload = displayWord;
+  </script>
+</head>
+
+<body>
+<center>
+   <h1> FIND THE CORRECT WORD FROM THE GIVEN JUMPLED LETTERS</h1><br>
+  <div id="wordContainer" class="word" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+  <p id="result"></p>
+  <a href ="five.html"><img id="next" src="next.jpeg" width="50" height="50"></a><br><br>
+  <a href ="home.html"><img id="home" src="home.png" width="50" height="50"></a></center>
+  </body> 
+</html>   
