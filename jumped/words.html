@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>WORDS</title>
+      <script type="text/javascript" src="1.js"></script>
+         
+      <style>  
+    .word {
+      display: inline-block;
+      font-size: 45px;
+      color: rgba(255, 0, 0, 0.555);
+    }
+    body {background-color: rgb(235, 226, 205);
+    animation-name: body;
+    animation-duration: 130s;}
+    @keyframes body{
+      10% {background-color: antiquewhite;}
+      10% {background-color: rgb(211, 239, 147);}
+      20% {background-color: rgb(210, 182, 236);}
+      30% {background-color: rgb(237, 233, 175);}
+    }
+    h1   {color: rgba(6, 6, 123, 0.618);}
+    .button {font-size: 30px;}
+    h2 {
+      color:rgba(171, 33, 67, 0.618)
+    }
+    
+  </style>
+  <script>
+     const Oword = ["TABLE","LAPTOP","PHONE","KEYBOARD","DISPLAY"];
+     const cword = ["EATLB","PPTALO","ENHPO","YEBRDOKA","ISALPYD"];
+     
+  </script>
+  </head>
+  <body>
+  
+      <center><h1>CLICK A NUMBER TO PLAY</h1>
+        
+         <p class="button">
+          <a id="1"><button onclick="wordz(0)">1</button></a>
+          <a id="2"><button onclick="wordz(1)">2</button></a>
+          <a id="3"><button onclick="wordz(2)">3</button></a>
+          <a id="4"><button onclick="wordz(3)">4</button></a>
+          <a id="5"><button onclick="wordz(4)">5</button></a>
+         </p>
+         <h2>SWAP THE WORD TO FIND CORRECT</h2>
+         <div id="wordContainer" class="word" ondrop="drop(event)" ondragover="dropallow(event)"></div>
+         <p id="result"></p>
+         <p id="dd"></p>
+         <a href="home.html"><img src="home.jpeg" width="50" height="50"></a>
+      </center> 
+  </body>
+</html>     
+
