@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JUMPLED WORDS</title>
+  <style>
+    .word {
+      display: inline-block;
+      padding: 5px;
+      border: 1px solid #ccc;
+      font-size: 35px;
+    }
+    body {
+  background-color: powderblue;
+}
+
+h1 {
+  color: rgb(71, 71, 185)
+}
+h2 {
+  color: rgb(255, 94, 0)
+}
+    
+  </style>
+  <script>
+    let originalWord = "PHONE";
+    let c = "ENHPO"
+    let currentWord = c.split('');
+
+    function allowDrop(ev) {
+      ev.preventDefault();
+    }
+
+    function drag(ev) {
+      ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    function drop(ev) {
+      ev.preventDefault();
+      const sourceId = ev.dataTransfer.getData("text");
+      const sourceChar = document.getElementById(sourceId).textContent;
+      const targetChar = ev.target.textContent;
+      const sourceIndex = currentWord.indexOf(sourceChar);
+      const targetIndex = currentWord.indexOf(targetChar);
+      currentWord[sourceIndex] = targetChar;
+      currentWord[targetIndex] = sourceChar;
+      displayWord();
+    }
+
+    function displayWord() {
+      const wordContainer = document.getElementById("wordContainer");
+      wordContainer.innerHTML = "";
+
+      currentWord.forEach((char, index) => {
+        const charElement = document.createElement("span");
+        charElement.textContent = char;
+        charElement.id = `char_${index}`;
+        charElement.draggable = true;
+        charElement.addEventListener("dragstart", drag);
+        wordContainer.appendChild(charElement);
+      });
+
+      if (currentWord.join("") === originalWord) {
+        document.getElementById("result").textContent = "CORRECT";
+      } else {
+        document.getElementById("result").textContent = "WRONG";
+      }
+    }
+
+    window.onload = displayWord;
+  </script>
+</head>
+<body><center>
+  <h1>JUMPLED WORDS</h1>
+  <div id="wordContainer" class="word" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+  <p id="result"></p> 
+ <a href ="four.html"><img id="next" src="next.jpeg" width="50" height="50"></a><br><br>
+ <a href ="home.html"><img id="home" src="home.png" width="50" height="50"></a></center>
+</body>
+</html>
+
